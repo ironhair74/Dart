@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>씨엠티엑스(CMTX) 기업 분석 · 5인 리뷰</title>
+<style>
+.viz-root{
+  color-scheme:light;
+  --surface-0:#f4f3f0; --surface-1:#fcfcfb; --surface-2:#f0efec;
+  --border:#dedcd5; --grid:#e6e4de;
+  --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#7a7873;
+  --series-1:#2a78d6; --series-2:#eb6834;
+  --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b;
+  --accent:#2a78d6;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])) .viz-root{
+    color-scheme:dark;
+    --surface-0:#121211; --surface-1:#1a1a19; --surface-2:#262624;
+    --border:#3a3a37; --grid:#2e2e2b;
+    --text-primary:#f0efec; --text-secondary:#c3c2b7; --text-muted:#94938b;
+    --series-1:#3987e5; --series-2:#d95926; --accent:#3987e5;
+  }
+}
+:root[data-theme="dark"] .viz-root{
+  color-scheme:dark;
+  --surface-0:#121211; --surface-1:#1a1a19; --surface-2:#262624;
+  --border:#3a3a37; --grid:#2e2e2b;
+  --text-primary:#f0efec; --text-secondary:#c3c2b7; --text-muted:#94938b;
+  --series-1:#3987e5; --series-2:#d95926; --accent:#3987e5;
+}
+*{box-sizing:border-box}
+body{margin:0}
+.viz-root{background:var(--surface-0);color:var(--text-primary);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;line-height:1.6;font-size:15px;min-height:100vh}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 80px}
+header.hero{padding:8px 0 18px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+h1{font-size:28px;margin:4px 0 6px;line-height:1.3}
+h2{font-size:21px;margin:38px 0 12px;padding-top:6px}
+h3{font-size:17px;margin:24px 0 8px}
+h4{font-size:15px;margin:16px 0 6px}
+p{margin:6px 0 10px}
+.sub{color:var(--text-secondary)}
+.muted{color:var(--text-muted);font-size:13px}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+nav.toc a{font-size:13px;color:var(--text-secondary);text-decoration:none;border:1px solid var(--border);padding:3px 10px;border-radius:999px;background:var(--surface-1)}
+nav.toc a:hover{color:var(--text-primary)}
+.card{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:14px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.g5{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.tile{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.tile .k{font-size:12px;color:var(--text-muted)}
+.tile .v{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px}
+.tile .d{font-size:12.5px;color:var(--text-secondary)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 8px;border-bottom:1px solid var(--grid);text-align:right;vertical-align:top}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--text-secondary);font-weight:600;background:var(--surface-2)}
+td.l,th.l{text-align:left}
+tr.em td{font-weight:700}
+.tbl-wrap{overflow-x:auto}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;border:1px solid var(--border);color:var(--text-secondary);background:var(--surface-2);white-space:nowrap}
+.status{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.status i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.s-good i{background:var(--good)} .s-warn i{background:var(--warning)} .s-serious i{background:var(--serious)} .s-crit i{background:var(--critical)}
+ul{margin:6px 0 10px;padding-left:20px} li{margin:3px 0}
+.callout{border-left:3px solid var(--accent);background:var(--surface-2);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.note{font-size:12.5px;color:var(--text-muted)}
+.est{font-size:11px;padding:0 6px;border-radius:4px;border:1px dashed var(--text-muted);color:var(--text-muted);margin-left:4px;white-space:nowrap}
+/* persona */
+.persona{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.badge{width:34px;height:34px;border-radius:50%;flex:none;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+.b-black{background:#111;color:#fff}
+.b-red{background:#b42323;color:#fff}
+.b-blue{background:#1f5fae;color:#fff}
+.b-silver{background:#c9c9c9;color:#111}
+.b-gold{background:#c9a227;color:#111}
+.persona .who{font-weight:700}
+.persona .role{font-size:12.5px;color:var(--text-secondary)}
+.score{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums}
+.score small{font-size:14px;color:var(--text-muted);font-weight:600}
+details{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;margin:10px 0;padding:0 16px}
+details summary{cursor:pointer;padding:12px 0;font-weight:700}
+details[open] summary{border-bottom:1px solid var(--grid);margin-bottom:8px}
+/* charts */
+.chart{position:relative}
+.chart-title{font-weight:700;font-size:14.5px;margin:0 0 2px}
+.chart-sub{font-size:12.5px;color:var(--text-muted);margin:0 0 8px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--text-secondary);margin:0 0 6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:3px;border-radius:2px;display:inline-block}
+.legend i.sq{height:10px;width:10px;border-radius:2px}
+svg text{font-family:inherit}
+.tip{position:absolute;pointer-events:none;background:var(--surface-1);border:1px solid var(--border);box-shadow:0 4px 14px rgba(0,0,0,.14);border-radius:8px;padding:7px 10px;font-size:12.5px;color:var(--text-primary);white-space:nowrap;opacity:0;transition:opacity .08s;z-index:5}
+.tip b{font-variant-numeric:tabular-nums}
+.bar-cell{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.mini{height:8px;border-radius:4px;background:var(--series-1);display:inline-block}
+.score-pass{font-weight:800}
+.theme-toggle{float:right;font-size:12px;border:1px solid var(--border);background:var(--surface-1);color:var(--text-secondary);border-radius:999px;padding:3px 10px;cursor:pointer}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;color:var(--text-muted)}
+</style>
+</head>
+<body>
+<div class="viz-root">
+<div class="wrap">
+
+<header class="hero">
+  <button class="theme-toggle" id="themeBtn" type="button">라이트/다크 전환</button>
+  <div class="eyebrow">Equity Research · KOSDAQ 388210 · 기준일 2026-10-31</div>
+  <h1>씨엠티엑스(CMTX) — 실리콘 파츠 고성장, 그러나 ‘숫자 밖’ 리스크를 읽어야 할 때</h1>
+  <p class="sub">블랙(탑티어 애널리스트)의 기업 현황 보고서와, 레드·블루·실버·골드 4인의 검토 및 평점. 리뷰어 4명 모두 9.5점 이상을 줄 때까지 4라운드에 걸쳐 보고서를 개정했습니다.</p>
+  <nav class="toc">
+    <a href="#summary">요약</a><a href="#black">블랙 보고서</a><a href="#earnings">영업이익 분석</a><a href="#bs">재무·현금흐름</a><a href="#own">지분 변동</a><a href="#val">밸류에이션</a><a href="#risk">리스크·촉매</a><a href="#reviews">리뷰어 검토</a><a href="#rounds">평가 라운드</a><a href="#method">데이터·한계</a>
+  </nav>
+</header>
+
+<section id="summary">
+  <div class="grid g4">
+    <div class="tile"><div class="k">영업이익 2023 → 2025</div><div class="v">28.8 → 517.8억</div><div class="d">2년간 18.0배 · 연평균 +324%</div></div>
+    <div class="tile"><div class="k">영업이익률 2025 / 2026 상반기</div><div class="v">32.3% / 31.6%</div><div class="d">2023년 4.1%에서 구조적으로 개선</div></div>
+    <div class="tile"><div class="k">순현금 (2026.06 말)</div><div class="v">483억</div><div class="d">셀릭 RCPS 관련 부채 386억을 빼면 약 97억</div></div>
+    <div class="tile"><div class="k">최대주주 박성훈 대표</div><div class="v">29.36%</div><div class="d">2028-05-20까지 보호예수 · 매도 없음</div></div>
+  </div>
+  <div class="grid g5" style="margin-top:14px" id="finalScores"></div>
+</section>
+
+<!-- ===================== BLACK REPORT ===================== -->
+<h2 id="black">블랙 보고서 — 최종본 (v4)</h2>
+<div class="card">
+  <div class="persona"><div class="badge b-black">B</div><div><div class="who">블랙 · 탑티어 셀사이드 애널리스트</div><div class="role">반도체 소부장 담당 · 공시 원문 기반 · 투자의견 ‘긍정적(조건부)’</div></div></div>
+  <h3 style="margin-top:8px">투자 요약</h3>
+  <ul>
+    <li><b>무엇을 하는 회사인가:</b> 식각(Etch) 장비 챔버에 들어가는 소모성 실리콘 파츠(포커스링 등)를 만듭니다. 2026년 상반기 별도 매출의 96.2%가 실리콘 파츠이고, 65%를 수출합니다. 2025년 11월 20일 코스닥에 상장했습니다(공모가 60,500원, 605억 원 조달).</li>
+    <li><b>이익 체력:</b> 2023~2025년 매출은 연평균 51% 늘었고, 매출총이익률은 13.1%에서 40.4%로 올랐습니다. 영업이익은 28.8억에서 517.8억이 됐습니다. 2026년 상반기에도 영업이익률 31.6%로 고마진을 유지했습니다.</li>
+    <li><b>성장 속도는 둔화:</b> 2026년 상반기 매출은 +19%, 영업이익은 +10.5%였습니다. 상장 후 판관비가 68% 늘어 영업 레버리지가 일시적으로 반대로 작용했습니다.</li>
+    <li><b>숫자 밖 리스크 세 가지:</b> ① 고객 A 매출 비중 74.7% ② 자회사 셀릭 RCPS 상환청구권(장부상 관련 부채 386억, 상환가치 추정 약 366억) ③ 보호예수가 없는 소부장 PEF 지분 13.6%.</li>
+    <li><b>결론:</b> 기본 시나리오에서 2027년 예상 EPS는 약 5,390원, PER 12~18배를 적용한 적정가치 범위는 6.5만~9.7만 원입니다. 이 보고서에는 현재 주가가 반영되어 있지 않으니 판단 전에 현재가를 직접 대입해야 합니다(<a href="#val">민감도 표</a> 참조).</li>
+  </ul>
+</div>
+
+<!-- Earnings -->
+<h2 id="earnings">1. 영업이익 변동 분석 (최근 3개년 + 2026 상반기)</h2>
+<div class="grid g2">
+  <div class="card chart" id="c-annual">
+    <p class="chart-title">연간 영업이익 (연결)</p>
+    <p class="chart-sub">단위: 억 원 · 2026년은 상반기 누적 실적</p>
+  </div>
+  <div class="card chart" id="c-quarter">
+    <p class="chart-title">분기 영업이익 (연결)</p>
+    <p class="chart-sub">단위: 억 원 · 반기·누적 실적에서 빼서 계산</p>
+  </div>
+</div>
+
+<div class="card tbl-wrap">
+  <h4 style="margin-top:0">연간 손익 요약 (연결, 억 원)</h4>
+  <table>
+    <tr><th>항목</th><th>2023</th><th>2024</th><th>2025</th><th>2025 상반기</th><th>2026 상반기</th></tr>
+    <tr><td>매출액</td><td>702.0</td><td>1,086.7</td><td>1,605.6</td><td>773.5</td><td>920.2</td></tr>
+    <tr><td class="l">&nbsp;&nbsp;증감률</td><td>–</td><td>+54.8%</td><td>+47.8%</td><td>–</td><td>+19.0%</td></tr>
+    <tr><td>매출총이익 (이익률)</td><td>92.3 (13.1%)</td><td>332.0 (30.6%)</td><td>648.1 (40.4%)</td><td>319.2 (41.3%)</td><td>385.1 (41.9%)</td></tr>
+    <tr><td>판관비 (매출 대비)</td><td>63.6 (9.1%)</td><td>95.7 (8.8%)</td><td>130.3 (8.1%)</td><td>56.1 (7.2%)</td><td>94.3 (10.2%)</td></tr>
+    <tr class="em"><td>영업이익 (이익률)</td><td>28.8 (4.1%)</td><td>236.4 (21.8%)</td><td>517.8 (32.3%)</td><td>263.1 (34.0%)</td><td>290.8 (31.6%)</td></tr>
+    <tr><td>금융비용</td><td>538.3</td><td>138.2</td><td>705.2</td><td>–</td><td>–</td></tr>
+    <tr><td>당기순이익</td><td>-473.9</td><td>135.0</td><td>-215.0</td><td>-458.3</td><td>241.9</td></tr>
+    <tr><td>&nbsp;&nbsp;지배주주 몫</td><td>-473.9</td><td>135.2</td><td>-250.6</td><td>-457.9</td><td>218.0</td></tr>
+  </table>
+  <p class="note">출처: OpenDART 단일회사 전체 재무제표(사업보고서 2025, 반기보고서 2025·2026). 2023년 수치는 2025 사업보고서의 전전기 비교 수치입니다.</p>
+</div>
+
+<div class="card chart" id="c-margin">
+  <p class="chart-title">분기 매출총이익률 · 영업이익률</p>
+  <p class="chart-sub">단위: % · 2025년 4분기 하락은 매출원가 쪽에서 생겼습니다</p>
+</div>
+
+<div class="card tbl-wrap">
+  <h4 style="margin-top:0">분기 실적 분해 (연결, 억 원)</h4>
+  <table id="qtable">
+    <tr><th>분기</th><th>매출</th><th>매출총이익률</th><th>판관비</th><th>영업이익</th><th>영업이익률</th><th>영업이익 전년 동기 대비</th></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h4 style="margin-top:0">블랙의 해석</h4>
+  <ol>
+    <li><b>2023→2024년, 이익 구조가 바뀐 해.</b> 매출이 55% 늘면서 매출총이익률이 13%에서 31%로 뛰었습니다. 2024년 2월 구미 하이테크밸리 신축공장이 가동되고 삼성전자 PCN Audit을 통과했습니다. 고정비가 큰 소모품 사업이라 가동률이 오르면 이익이 크게 불어납니다. 판관비율이 9.1%에서 8.8%로 거의 그대로였기 때문에, 이익 증가는 거의 전부 매출총이익 개선에서 나왔습니다.</li>
+    <li><b>2025년, 고마진이 자리 잡은 해.</b> 매출총이익률 40.4%, 영업이익률 32.3%를 기록했습니다. 판관비율은 8.1%로 내려가 규모의 경제가 확인됐습니다. 2025년 11월 마이크론 글로벌 공급사 최우수협력사상을 받았고, 수출 비중이 60%를 넘었습니다.</li>
+    <li><b>2025년 4분기, 일시적 꺾임.</b> 영업이익률이 23.7%로 떨어졌습니다. 판관비 증가(35.0억 → 39.2억)보다 <u>매출총이익률 하락(46.2% → 33.0%)</u>이 주원인입니다. 공시에서 원인이 드러나지 않습니다. 연말 재고평가, 성과급, 상장 관련 비용 등이 후보지만 검증하지 못했습니다. 2026년 1분기에 매출총이익률이 41.0%로 돌아와 구조적 악화는 아닌 것으로 판단합니다.</li>
+    <li><b>2026년, 판관비가 늘어나는 구간.</b> 상반기 판관비가 전년 동기보다 68% 늘어 영업이익 증가율(+10.5%)이 매출 증가율(+19.0%)을 밑돌았습니다. 상장사 운영비, 인력 확충, 주식보상 등이 원인으로 보입니다. 다만 2분기 영업이익 155.8억은 분기 최대치이고, 2분기 연속 매출이 늘었습니다(441.2억 → 479.0억).</li>
+    <li><b>영업이익과 순이익은 왜 따로 움직였나.</b> 2023년과 2025년 순손실은 RCPS와 주주간계약 관련 파생상품 평가손실 때문입니다. 2025년 손실은 477.8억(2026.03.20 파생상품거래손실 공시)이고 현금이 나가지 않는 손실입니다. 씨엠티엑스 본체의 RCPS는 상장 때 전부 보통주로 바뀌었기 때문에, 2026년부터는 영업이익이 순이익으로 이어지는 구조가 정상화됐습니다.</li>
+  </ol>
+  <div class="callout"><b>공시 신뢰도 점검:</b> 2026.02.09 잠정 공시와 감사 후 확정치가 다릅니다. 잠정 공시는 영업이익 516.2억, 순이익 -123.3억이었고, 감사 후 확정치는 영업이익 517.8억, 순이익 -215.0억입니다. 영업이익은 거의 같지만 <b>순이익이 91.7억 더 나빠졌습니다.</b> 파생상품 평가는 수준 3 공정가치(관측 불가 변수 기반)여서 변동성이 크다는 점을 보여 줍니다.</div>
+</div>
+
+<!-- BS / CF -->
+<h2 id="bs">2. 재무상태 · 현금흐름</h2>
+<div class="card tbl-wrap">
+  <table>
+    <tr><th>항목 (연결, 억 원)</th><th>2023 말</th><th>2024 말</th><th>2025 말</th><th>2026.06 말</th></tr>
+    <tr><td>자산총계</td><td>1,645.7</td><td>1,803.6</td><td>2,754.5</td><td>3,067.9</td></tr>
+    <tr><td>현금및현금성자산</td><td>227.3</td><td>247.4</td><td>929.8</td><td>792.9</td></tr>
+    <tr><td>총차입금 (단기+유동성장기+장기+사채)</td><td>530.2</td><td>452.6</td><td>347.2</td><td>309.7</td></tr>
+    <tr><td>파생상품부채 + RCPS부채 + 공정가치측정부채</td><td>1,484.6</td><td>1,564.6</td><td>377.0</td><td>386.0</td></tr>
+    <tr class="em"><td>자본총계</td><td>-542.0</td><td>-379.6</td><td>1,824.1</td><td>2,137.1</td></tr>
+    <tr><td>재고자산 (재고일수*)</td><td>331.4</td><td>333.0 (161일)</td><td>499.5 (190일)</td><td>603.8 (206일)</td></tr>
+    <tr><td>매출채권 (회수일수*)</td><td>78.7</td><td>93.4 (31일)</td><td>180.7 (41일)</td><td>266.6 (53일)</td></tr>
+    <tr><td>영업활동현금흐름</td><td>12.5</td><td>354.9</td><td>361.9</td><td>112.9 (상반기)</td></tr>
+    <tr><td>투자활동현금흐름</td><td>-316.7</td><td>-267.4</td><td>-171.2</td><td>-255.8 (상반기)</td></tr>
+  </table>
+  <p class="note">* 재고일수 = 재고 ÷ 연간(또는 반기×2) 매출원가 × 365. 회수일수 = 매출채권 ÷ 연환산 매출 × 365. 블랙이 직접 계산한 값입니다.</p>
+</div>
+<div class="card">
+  <ul>
+    <li><b>완전자본잠식에서 벗어남:</b> 2024년 말 자본은 -379.6억이었습니다. RCPS가 보통주로 바뀌고 공모로 605억이 들어오면서 2025년 말 +1,824.1억이 됐습니다. 2026년 상반기에는 결손금이 -819.5억에서 -1.5억으로 거의 사라졌습니다. 같은 기간 자본잉여금이 약 522억 줄어든 것으로 보아 자본잉여금으로 결손을 보전한 것으로 추정됩니다. 앞으로 배당할 수 있는 여건이 마련됐다는 뜻입니다.</li>
+    <li><b>신용등급 상향:</b> NICE D&amp;B 기준 BB+(2025.10)에서 BBB0(2026.04)로 올랐습니다.</li>
+    <li><b>운전자본 경고:</b> 재고일수가 161일 → 190일 → 206일로 늘었고, 매출채권 회수일수도 31일 → 53일로 길어졌습니다. 이 때문에 2026년 상반기 영업현금흐름은 112.9억에 그쳤습니다(운전자본 변동 -200.6억). 증설(건설중인자산 199억)까지 겹쳐 상반기 잉여현금흐름은 약 -143억입니다.</li>
+    <li><b>공모자금 사용 계획:</b> 시설 400억, 운영 80억, 채무상환 125억입니다. 실제로 총차입금이 452.6억에서 309.7억으로 줄어 계획대로 쓰이고 있습니다.</li>
+    <li><b>증설:</b> M캠퍼스 증축에 177억(자기자본 대비 8.7%)을 2026.01~12 투자합니다. 상반기 가동률은 79.2%입니다. 새 생산능력이 매출에 반영되는 시점은 2027년으로 봅니다.</li>
+  </ul>
+  <div class="callout"><b>자회사 셀릭(지분 58.6%)의 RCPS — 이 보고서의 핵심 부외 리스크:</b> 셀릭은 2022.10.07 RCPS 290억을 발행했습니다(연복리 6%, 발행 3년 후부터 상환청구 가능). 상환청구권은 2025.10부터 행사할 수 있습니다. 2026.10 기준 상환가치는 290억 × 1.06<sup>4</sup> ≈ <b>366억</b>으로 추정됩니다. 장부에는 RCPS부채 98.0억, 내재파생상품부채 234.6억, 씨엠티엑스가 당사자로 참여한 주주간계약 파생부채 53.4억이 잡혀 있습니다(합계 386억). 상환이 청구되면 현금이 실제로 빠져나갑니다. 이를 반영한 조정 순현금은 <b>약 97억</b>입니다. 셀릭 자체는 2025년 순이익 127.1억(자산 612억)으로 흑자 전환했습니다. 따라서 투자자는 상환보다 보통주 전환을 택할 가능성이 커졌지만, 확정된 것은 아닙니다.</div>
+</div>
+
+<!-- Ownership -->
+<h2 id="own">3. 대주주 · 임원 · 주요주주 지분 변동</h2>
+<div class="grid g2">
+  <div class="card">
+    <h4 style="margin-top:0">최대주주 박성훈 대표이사</h4>
+    <table>
+      <tr><th>시점</th><th>주식 수</th><th>본인 지분</th><th>특수관계인 포함</th></tr>
+      <tr><td>2024 말 (상장 전)</td><td>283,464</td><td>34.48%</td><td>–</td></tr>
+      <tr><td>2025.07 무상증자(10배)</td><td>2,834,640</td><td>–</td><td>–</td></tr>
+      <tr><td>2025.11 상장</td><td>2,834,640</td><td>30.57%</td><td>32.05%</td></tr>
+      <tr><td>2026.04 (특수관계인 스톡옵션 행사)</td><td>2,834,640</td><td>–</td><td>31.61%</td></tr>
+      <tr class="em"><td>2026.06 말</td><td>2,834,640</td><td>29.36%</td><td>–</td></tr>
+    </table>
+    <p class="note">주식 수 변동은 무상증자와 신주 발행(공모 100만 주, 스톡옵션 24.2만 주) 때문입니다. 박 대표는 한 주도 팔지 않았습니다. 보유 주식 전량이 2028-05-20까지 보호예수(의무 + 자발적)되어 있고, 설립 이후 최대주주가 바뀐 적이 없습니다.</p>
+  </div>
+  <div class="card">
+    <h4 style="margin-top:0">임원 보유 현황 (주로 2026.01~04 스톡옵션 행사분)</h4>
+    <table>
+      <tr><th>임원</th><th>직위</th><th>주식 수</th><th>지분율</th></tr>
+      <tr><td>김영근</td><td>전무</td><td>106,250</td><td>1.10%</td></tr>
+      <tr><td>박종화</td><td>각자대표</td><td>30,000 → 35,000</td><td>0.36%</td></tr>
+      <tr><td>김경무</td><td>상무</td><td>21,000</td><td>0.22%</td></tr>
+      <tr><td>장민기</td><td>상무 (등기)</td><td>15,000</td><td>0.16%</td></tr>
+      <tr><td>허정수 · 송인광</td><td>상무</td><td>각 2,500</td><td>각 0.03%</td></tr>
+      <tr class="em"><td>합계</td><td></td><td>182,250</td><td>약 1.9%</td></tr>
+    </table>
+    <p class="note">2026.01 스톡옵션 242,250주(제3~5회차 등)가 행사가 500원에 행사됐습니다. 임원이 장내에서 판 공시는 아직 없습니다. 다만 매수 원가가 매우 낮고 보호예수 대상이 아니어서 앞으로 매도할 유인이 있습니다.</p>
+  </div>
+</div>
+
+<div class="card chart" id="c-own">
+  <p class="chart-title">재무적 투자자·기관 지분율 — 상장 직후 vs 최근 보고</p>
+  <p class="chart-sub">단위: % · 주식등의대량보유상황보고서 기준(5% 미만으로 내려가면 보고 의무가 끝남)</p>
+</div>
+<div class="card tbl-wrap">
+  <table>
+    <tr><th>주주</th><th>상장 직후</th><th>최근 보고 (일자)</th><th>변동</th><th>보호예수</th><th>판단</th></tr>
+    <tr><td>코리아반도체소부장제1호 PEF</td><td>14.15%</td><td>14.15% (2025.11.26)</td><td>0</td><td>없음 (2026.06 기준)</td><td><span class="status s-serious"><i></i>최대 오버행</span></td></tr>
+    <tr><td>한국산업은행</td><td>13.09%</td><td>6.63% (2026.10.08)</td><td>-6.46%p</td><td>없음</td><td><span class="status s-warn"><i></i>계속 매도 중</span></td></tr>
+    <tr><td>케이투인베스트먼트</td><td>10.56%</td><td>1.35% (2025.12.24)</td><td>-9.21%p</td><td>없음</td><td><span class="status s-good"><i></i>대부분 처분</span></td></tr>
+    <tr><td>기술보증기금</td><td>5.60%</td><td>0.6% (2026.01.07)</td><td>-5.0%p</td><td>없음</td><td><span class="status s-good"><i></i>대부분 처분</span></td></tr>
+    <tr><td>미래에셋자산운용</td><td>5.10% (2026.01 신규)</td><td>4.96% (2026.03.03)</td><td>-0.14%p</td><td>–</td><td><span class="pill">기관 수급</span></td></tr>
+    <tr><td>국민연금공단</td><td>5.03% (2026.04 신규)</td><td>3.87% (2026.07.01)</td><td>-1.16%p</td><td>–</td><td><span class="pill">기관 수급</span></td></tr>
+  </table>
+  <p class="note">발행주식 9,654,438주(2026.06) 중 보호예수 물량은 2,834,640주(29.4%)뿐입니다. 나머지 약 70.6%는 기술적으로 언제든 팔 수 있습니다. 상장 시 기관 배정 물량의 6개월 의무보유 확약은 2026.05에 모두 풀렸습니다.</p>
+</div>
+
+<!-- Valuation -->
+<h2 id="val">4. 밸류에이션 — 시나리오와 주가 민감도</h2>
+<div class="card">
+  <div class="callout"><b>중요한 한계:</b> 이 보고서를 쓰는 환경에서는 시세 사이트에 접속할 수 없어 <b>현재 주가를 확인하지 못했습니다.</b> 아래 표의 기준가는 공모가(60,500원)입니다. 투자 판단 전에 현재가를 직접 대입하세요.</div>
+  <div class="grid g2">
+    <div class="tbl-wrap">
+      <h4>실적 추정 (블랙 추정)<span class="est">추정</span></h4>
+      <table>
+        <tr><th>억 원</th><th>최근 4개 분기(실적)</th><th>2026E</th><th>2027E 기본</th></tr>
+        <tr><td>매출</td><td>1,752.3</td><td>1,920</td><td>2,300</td></tr>
+        <tr><td>영업이익</td><td>545.5</td><td>595</td><td>713</td></tr>
+        <tr><td>영업이익률</td><td>31.1%</td><td>31.0%</td><td>31.0%</td></tr>
+        <tr><td>지배주주 순이익</td><td>425.3</td><td>436</td><td>520</td></tr>
+        <tr class="em"><td>EPS (원, 965.4만 주)</td><td>4,405</td><td>4,516</td><td>5,390</td></tr>
+      </table>
+      <p class="note">가정: 2026년 하반기 매출은 상반기의 1.08배(2분기 실적 수준 유지). 2027년은 증설분이 반영돼 +20%. 법인세율 20%, 금융손익 0, 비지배지분(셀릭 41.4%) 몫 연 40~50억.</p>
+    </div>
+    <div class="tbl-wrap">
+      <h4>시나리오별 적정가치 (2027E 기준)<span class="est">추정</span></h4>
+      <table>
+        <tr><th>시나리오</th><th>매출 / 영업이익률</th><th>EPS</th><th>PER</th><th>적정가치</th></tr>
+        <tr><td>약세</td><td>1,900억 / 26%</td><td>3,630</td><td>10배</td><td>36,300원</td></tr>
+        <tr class="em"><td>기본</td><td>2,300억 / 31%</td><td>5,390</td><td>12~18배</td><td>64,700~97,000원</td></tr>
+        <tr><td>강세</td><td>2,700억 / 33%</td><td>6,840</td><td>18배</td><td>123,100원</td></tr>
+      </table>
+      <p class="note">PER 10~18배는 국내 반도체 소모성 부품 업종이 역사적으로 받아 온 통상 범위를 블랙이 가정한 값입니다. 실시간 동종업체 배수로 검증하지 않았습니다.</p>
+    </div>
+  </div>
+  <h4>주가 민감도 — 현재가를 대입해 보세요</h4>
+  <div class="tbl-wrap">
+  <table id="sens">
+    <tr><th>주가 (원)</th><th>시가총액</th><th>PER (최근 4개 분기)</th><th>PER (2027E)</th><th>EV/EBIT (최근 4개 분기)*</th></tr>
+  </table>
+  </div>
+  <p class="note">* EV = 시가총액 − 순현금 483억 + 셀릭 RCPS 관련 부채 386억 + 비지배지분 68억. EBIT은 최근 4개 분기 영업이익 545.5억.</p>
+</div>
+
+<!-- Risk / Catalysts -->
+<h2 id="risk">5. 리스크 매트릭스 · 촉매 · 모니터링 지표</h2>
+<div class="grid g2">
+  <div class="card tbl-wrap">
+    <h4 style="margin-top:0">리스크 매트릭스</h4>
+    <table>
+      <tr><th class="l">리스크</th><th>가능성</th><th>영향</th><th class="l">근거</th></tr>
+      <tr><td>고객 A 의존</td><td><span class="status s-warn"><i></i>중</span></td><td><span class="status s-crit"><i></i>높음</span></td><td class="l">별도 매출의 74.7%(2025 상반기 84.6%에서 하락 중)</td></tr>
+      <tr><td>오버행 (PEF·산업은행)</td><td><span class="status s-crit"><i></i>높음</span></td><td><span class="status s-warn"><i></i>중</span></td><td class="l">합계 약 20%, 보호예수 없음</td></tr>
+      <tr><td>셀릭 RCPS 상환</td><td><span class="status s-warn"><i></i>중</span></td><td><span class="status s-warn"><i></i>중</span></td><td class="l">상환가치 약 366억, 순현금의 76%</td></tr>
+      <tr><td>운전자본 악화</td><td><span class="status s-warn"><i></i>중</span></td><td><span class="status s-warn"><i></i>중</span></td><td class="l">재고일수 206일, 상반기 잉여현금흐름 마이너스</td></tr>
+      <tr><td>제품 편중</td><td><span class="status s-crit"><i></i>높음</span></td><td><span class="status s-warn"><i></i>중</span></td><td class="l">실리콘 96%, 세라믹·사파이어는 각 1% 미만</td></tr>
+      <tr><td>회계 변동성</td><td><span class="status s-warn"><i></i>중</span></td><td><span class="status s-good"><i></i>낮음</span></td><td class="l">수준 3 파생상품 평가, 잠정치와 확정치의 순이익 차이</td></tr>
+      <tr><td>반도체 사이클</td><td><span class="status s-warn"><i></i>중</span></td><td><span class="status s-warn"><i></i>중</span></td><td class="l">소모품이라 장비주보다 방어적이지만, 가동률에 연동됨</td></tr>
+    </table>
+  </div>
+  <div class="card tbl-wrap">
+    <h4 style="margin-top:0">촉매 캘린더</h4>
+    <table>
+      <tr><th class="l">시기</th><th class="l">이벤트</th><th class="l">관전 포인트</th></tr>
+      <tr><td>2026.11 중순</td><td class="l">3분기 보고서 / 잠정실적</td><td class="l">분기 영업이익 160억 이상인지, 판관비 안정</td></tr>
+      <tr><td>2026.12</td><td class="l">M캠퍼스 증축 완공 예정</td><td class="l">추가 생산능력 규모 공개 여부</td></tr>
+      <tr><td>2027.02~03</td><td class="l">2026 결산, 첫 배당 여부</td><td class="l">결손 해소 후 첫 주주환원 정책</td></tr>
+      <tr><td>상시</td><td class="l">소부장 PEF 지분 처분</td><td class="l">블록딜 할인율과 받는 쪽(전략적 투자자인지)</td></tr>
+      <tr><td>상시</td><td class="l">셀릭 RCPS 전환 또는 상환</td><td class="l">전환이면 리스크 해소, 상환이면 현금 유출</td></tr>
+      <tr><td>2028.05</td><td class="l">최대주주 보호예수 해제</td><td class="l">지배력 유지 의지 확인</td></tr>
+    </table>
+  </div>
+</div>
+<div class="card tbl-wrap">
+  <h4 style="margin-top:0">모니터링 지표 (투자 논리가 깨지는 기준)</h4>
+  <table>
+    <tr><th class="l">지표</th><th>현재</th><th>경고 기준</th></tr>
+    <tr><td>분기 영업이익률</td><td>32.5% (2026 2분기)</td><td>2개 분기 연속 27% 미만</td></tr>
+    <tr><td>고객 A 비중</td><td>74.7%</td><td>80% 이상으로 다시 상승</td></tr>
+    <tr><td>재고일수</td><td>206일</td><td>230일 초과</td></tr>
+    <tr><td>판관비율</td><td>10.2%</td><td>12% 초과</td></tr>
+    <tr><td>조정 순현금 (RCPS 관련 부채 차감 후)</td><td>약 97억</td><td>마이너스 전환</td></tr>
+  </table>
+</div>
+
+<!-- ===================== REVIEWS ===================== -->
+<h2 id="reviews">6. 리뷰어 검토 (최종 라운드)</h2>
+<p class="sub">각 리뷰어는 자기 관점에서 회사를 검토하고, 블랙 보고서의 완성도를 10점 만점으로 평가했습니다.</p>
+
+<div class="card">
+  <div class="persona"><div class="badge b-red">R</div><div><div class="who">레드 · 비판적 투자자</div><div class="role">공매도·숏 리서치 관점 · “좋은 숫자 뒤에 숨은 것”을 찾음</div></div><div style="margin-left:auto" class="score">9.5<small>/10</small></div></div>
+  <h4>회사에 대한 검토</h4>
+  <ul>
+    <li><b>단일 고객·단일 제품 회사입니다.</b> 매출의 4분의 3이 고객 A에서 나오고, 96%가 실리콘 파츠입니다. 수주잔고도 없이 수시 발주로 운영됩니다. 고객 A가 공급사를 하나 더 늘리면 32% 영업이익률은 지켜지기 어렵습니다.</li>
+    <li><b>이익의 질이 떨어지고 있습니다.</b> 재고일수가 2년 새 161일에서 206일로 늘었고 회수일수도 길어졌습니다. 영업이익은 290.8억인데 영업현금흐름은 112.9억이라 이익의 39%만 현금으로 들어왔습니다.</li>
+    <li><b>공모 직후 차익 실현 구조입니다.</b> 재무적 투자자(산업은행·케이투·기보)가 상장 1년도 안 돼 지분 약 21%p를 팔았습니다. 임원은 500원짜리 스톡옵션을 받았고, PEF 13.6%는 보호예수 없이 남아 있습니다.</li>
+    <li><b>회계 가시성:</b> 잠정치와 감사 후 확정치의 순이익이 92억 차이 났고, 수준 3 파생상품부채가 여전히 288억 남아 있습니다.</li>
+  </ul>
+  <h4>블랙 보고서 평가 — 9.5점</h4>
+  <p>1라운드에서 지적한 누락 사항이 모두 반영됐습니다. 재무상태표·현금흐름, 셀릭 RCPS, 고객 집중, 잠정치와 확정치 차이, 재고일수가 들어갔습니다. 약세 시나리오(36,300원)와 투자 논리가 깨지는 기준을 숫자로 제시했고, ‘현재가 미반영’과 ‘PER 밴드 미검증’을 직접 밝힌 점도 신뢰를 높였습니다. 남은 아쉬움은 2025년 4분기 매출총이익률 급락의 원인이 아직 ‘미확인’이라는 점입니다. 투자의견 ‘긍정적’에는 여전히 동의하지 않지만, 보고서로서는 판단에 필요한 재료를 모두 줍니다.</p>
+</div>
+
+<div class="card">
+  <div class="persona"><div class="badge b-blue">B</div><div><div class="who">블루 · 개인투자자(개미 주주)</div><div class="role">주가 상승과 주주환원 기대 · “그래서 오를까?”</div></div><div style="margin-left:auto" class="score">9.6<small>/10</small></div></div>
+  <h4>회사에 대한 검토</h4>
+  <ul>
+    <li><b>실적은 진짜입니다.</b> 영업이익이 2년 만에 18배가 됐고, 2분기에 분기 최대 실적을 냈습니다. 마이크론 최우수협력사상, 신용등급 BBB0 상향까지 펀더멘털이 계속 좋아지고 있습니다.</li>
+    <li><b>재무구조가 깨끗해졌습니다.</b> 자본잠식에서 벗어났고 결손금도 거의 0이 됐습니다. 이제 배당을 기대할 수 있는 상태이고, 2027년 3월 첫 배당이 나온다면 큰 이벤트입니다.</li>
+    <li><b>걱정되는 것은 수급입니다.</b> 산업은행이 계속 팔고 PEF 물량도 남아 있습니다. 다만 대표가 2028년까지 한 주도 안 판다는 점은 든든합니다.</li>
+    <li><b>바라는 것:</b> 증설 효과가 나오는 2027년, 주주환원 정책 발표, PEF 물량이 전략적 투자자에게 넘어가는 그림입니다.</li>
+  </ul>
+  <h4>블랙 보고서 평가 — 9.6점</h4>
+  <p>제가 넣어 볼 수 있는 ‘주가 민감도 표’와 촉매 캘린더가 가장 유용합니다. 언제 무엇을 보면 되는지가 명확합니다. 기본 시나리오 적정가치가 공모가보다 높다는 점은 반갑지만, 오버행을 숨기지 않고 짚어 준 점이 더 믿음이 갑니다.</p>
+</div>
+
+<div class="card">
+  <div class="persona"><div class="badge b-silver">S</div><div><div class="who">실버 · 재무적 투자자 (인수·추가투자 검토)</div><div class="role">PE 하우스 관점 · EV, 우발채무, 경영권 구조, 엑시트</div></div><div style="margin-left:auto" class="score">9.6<small>/10</small></div></div>
+  <h4>회사에 대한 검토</h4>
+  <ul>
+    <li><b>지분 확보 경로:</b> 소부장 PEF 13.6%가 가장 현실적인 블록 매물입니다. 이 지분을 사면 2대 주주(경영 참여 협상력)가 되지만, 최대주주 29.4%가 보호예수 중이라 경영권 인수는 2028.05 전에는 불가능합니다. 지금 단계에서 가능한 것은 ‘전략적 소수 지분 + 이사회 의석’ 구조입니다.</li>
+    <li><b>EV 조정 항목:</b> 순현금 483억에서 셀릭 RCPS 상환가치 약 366억을 빼야 합니다. 비지배지분 68억도 EV에 더해야 합니다. 공모가 기준 EV/EBIT은 약 10.7배로, 성장률을 생각하면 비싸지 않습니다.</li>
+    <li><b>실사 우선순위:</b> ① 고객 A 기본거래계약 조건(독점·단가 조정 조항) ② 셀릭 RCPS 투자자의 상환·전환 의사 ③ 2025년 4분기 원가 급등 원인 ④ 7.22 임시주총 정관 변경 안건 내용(경영권 방어 조항인지).</li>
+    <li><b>밸류업 포인트:</b> 셀릭(잉곳)과 수직계열화되어 있어 원재료 안정성이 강점이고, 세라믹·사파이어로 확장할 여지가 있습니다.</li>
+  </ul>
+  <h4>블랙 보고서 평가 — 9.6점</h4>
+  <p>EV 산식(순현금, RCPS, 비지배지분)이 명시됐고, 셀릭을 따로 떼어 보여 준 점(지분 58.6%, 2025년 순이익 127억)이 실사 출발점으로 충분합니다. 다음에는 정관 변경 안건 원문을 확인해 반영해 주길 권합니다.</p>
+</div>
+
+<div class="card">
+  <div class="persona"><div class="badge b-gold">G</div><div><div class="who">골드 · 최대주주 (박성훈 대표 입장)</div><div class="role">경영권 안정 · 기업가치 · 장기 지배력</div></div><div style="margin-left:auto" class="score">9.7<small>/10</small></div></div>
+  <h4>회사에 대한 검토</h4>
+  <ul>
+    <li><b>지배력:</b> 본인 29.36%에 특수관계인을 더하면 약 31.6%입니다. 2대 주주 후보인 PEF(13.6%)와 차이가 크고, 7.22 임시주총 특별결의도 출석 주식 기준 89.9% 찬성으로 통과했습니다. 지금 당장 경영권 위협은 없습니다.</li>
+    <li><b>희석 관리:</b> 지분율이 34.5%에서 29.4%로 내려간 것은 공모와 스톡옵션 때문이고, 앞으로 추가 신주 발행은 최소화해야 합니다. 셀릭 RCPS를 상환이 아닌 셀릭 보통주 전환으로 유도하면 본사 현금도 지킬 수 있습니다.</li>
+    <li><b>PEF 물량 대응:</b> 시장에 흩어지면 주가에 부담이고, 적대적 세력에 넘어가면 경영권 리스크입니다. 우호적 전략적 투자자(고객사·장비사)를 받는 쪽으로 미리 손을 써야 합니다.</li>
+    <li><b>주주가치:</b> 결손이 해소됐으니 2026년 결산 때 첫 배당과 중장기 환원 정책을 내놓아 시장 신뢰를 얻는 것이 지배력 유지에도 유리합니다.</li>
+  </ul>
+  <h4>블랙 보고서 평가 — 9.7점</h4>
+  <p>제가 한 주도 팔지 않았다는 사실과, 지분율 하락이 희석 때문이라는 점을 정확히 구분했습니다. 경영권 측면의 쟁점(PEF 블록, 2028년 보호예수 해제, 정관 변경)도 균형 있게 다뤘습니다. 고객 집중 리스크를 크게 다룬 점은 불편하지만 사실이고, 경영진이 풀어야 할 과제로 받아들입니다.</p>
+</div>
+
+<!-- ===================== ROUNDS ===================== -->
+<h2 id="rounds">7. 평가 라운드 기록 — 9.5점 도달 과정</h2>
+<div class="card tbl-wrap">
+  <table id="scoreTable">
+    <tr><th class="l">리뷰어</th><th>1라운드 (v1)</th><th>2라운드 (v2)</th><th>3라운드 (v3)</th><th>4라운드 (v4·최종)</th></tr>
+  </table>
+  <p class="note">통과 기준: 리뷰어 4명 모두 9.5점 이상. 3라운드에서 블루·골드가 통과했고, 4라운드에서 레드·실버까지 통과해 개정을 마쳤습니다.</p>
+</div>
+
+<details open>
+  <summary>1라운드 — v1: 손익과 지분 변동 요약 (평균 6.3점)</summary>
+  <p><b>v1 내용:</b> 연간·분기 영업이익 표, 최대주주 지분, 임원 지분, 5% 주주 변동 (첫 채팅 분석과 같은 수준)</p>
+  <ul>
+    <li><b>레드 5.5</b> — 재무상태표와 현금흐름이 없습니다. 셀릭 RCPS, 고객 집중도, 잠정치와 확정치 차이, 재고 증가를 모두 놓쳤습니다. 손익계산서만으로는 이익의 질을 판단할 수 없습니다.</li>
+    <li><b>블루 6.5</b> — 실적이 좋다는 건 알겠는데, 그래서 주가는요? 공모가 대비 위치, 밸류에이션, 앞으로의 이벤트가 없습니다.</li>
+    <li><b>실버 6.0</b> — EV, 순현금, 우발채무, 보호예수 일정, 지배구조 정보가 없어 투자·인수 검토 자료로 쓸 수 없습니다.</li>
+    <li><b>골드 7.0</b> — 희석 효과 설명은 정확합니다. 하지만 보호예수, 우호지분, 경영권 쟁점이 빠졌고, PEF 오버행만 부각돼 일방적입니다.</li>
+  </ul>
+</details>
+<details>
+  <summary>2라운드 — v2: 재무상태·현금흐름·사업 구조 추가 (평균 8.2점)</summary>
+  <p><b>v1에서 바뀐 점:</b> 재무상태표·현금흐름 4개년, 순현금, 셀릭 RCPS 개요, 고객 A 비중, 제품 비중, 가동률, 증설, 공모가·공모자금 사용처, 보호예수, 신용등급 추가</p>
+  <ul>
+    <li><b>레드 7.8</b> — 좋아졌습니다. 하지만 재고일수·회수일수 같은 운전자본 지표, 잠정치와 확정치 차이, 2025년 4분기 마진 하락 원인 분해, 약세 시나리오가 없습니다.</li>
+    <li><b>블루 8.3</b> — 적정 주가를 숫자로 보여 주세요. 촉매 일정도 필요합니다.</li>
+    <li><b>실버 8.0</b> — RCPS 상환가치를 계산해 주고, EV 산식과 지분 확보 경로를 정리해 주세요.</li>
+    <li><b>골드 8.5</b> — 의결권 구조, 정관 변경, 주주환원 여력(결손 해소) 해석이 필요합니다.</li>
+  </ul>
+</details>
+<details>
+  <summary>3라운드 — v3: 마진 분해·운전자본·밸류에이션·리스크 매트릭스 추가 (평균 9.35점)</summary>
+  <p><b>v2에서 바뀐 점:</b> 분기 매출총이익률과 판관비 분해(4분기 하락은 원가 요인), 재고·회수일수, 잠정치와 확정치 차이, 약세·기본·강세 시나리오, EV/EBIT, RCPS 상환가치 366억, 오버행 지도, 촉매 캘린더, 리스크 매트릭스</p>
+  <ul>
+    <li><b>레드 9.0</b> — 근거를 투명하게 해 주세요. PER 밴드의 출처가 없고, 현재 주가를 반영하지 않았다는 한계가 본문에 드러나지 않습니다. 추정치에는 추정이라는 표시가 필요하고, 투자 논리가 깨지는 기준도 숫자로 있어야 합니다.</li>
+    <li><b>블루 9.5 ✓</b> — 민감도와 촉매 일정이 있어 실제로 쓸 수 있는 보고서입니다.</li>
+    <li><b>실버 9.3</b> — 셀릭을 따로 떼어 볼 수 있어야 합니다(지분율, 실적, 비지배지분). EV에 비지배지분도 넣어 주세요.</li>
+    <li><b>골드 9.6 ✓</b> — 경영권 쟁점이 균형 있게 정리됐습니다.</li>
+  </ul>
+</details>
+<details>
+  <summary>4라운드 — v4 최종: 한계 명시·가정 투명화·셀릭 분리·모니터링 지표 (평균 9.6점) ✓ 통과</summary>
+  <p><b>v3에서 바뀐 점:</b> ‘현재가 미반영’ 경고를 본문 상단에 배치, 모든 추정치에 <span class="est">추정</span> 표시, PER 밴드가 가정이고 미검증임을 명시, 셀릭 분리(58.6%, 2025년 순이익 127.1억, 자산 612억), EV에 비지배지분 68억 반영, 모니터링 지표 5개와 경고 기준, 데이터 한계 섹션 신설</p>
+  <ul>
+    <li><b>레드 9.5 ✓</b>, <b>블루 9.6 ✓</b>, <b>실버 9.6 ✓</b>, <b>골드 9.7 ✓</b> — 리뷰어 4명 모두 기준을 충족해 개정을 마쳤습니다.</li>
+  </ul>
+</details>
+
+<!-- ===================== METHOD ===================== -->
+<h2 id="method">8. 데이터 출처 · 검증할 수 없었던 것</h2>
+<div class="card">
+  <ul>
+    <li><b>출처:</b> 금융감독원 OpenDART API. 재무제표(사업·반기·분기보고서), 최대주주 현황, 임원·주요주주 소유보고, 대량보유보고, 그리고 주요사항 공시 원문(파생상품거래손실, 매출액 변동, 신규시설투자, 주식매수선택권 행사, 주주총회 결과, 증권발행실적보고서)을 사용했습니다. 기업 고유번호는 01529982입니다.</li>
+    <li><b>계산값:</b> 분기 실적(누적치 차감), 재고·회수일수, 순현금, RCPS 상환가치(연복리 6% × 4년), 최근 4개 분기 수치, EV는 블랙이 직접 계산했습니다.</li>
+    <li><b>검증하지 못한 것:</b> ① 현재 주가와 실시간 동종업체 배수(시세 사이트 접속 불가) ② 고객 A가 누구인지(공시에 비공개, 추정하지 않음) ③ 2025년 4분기 매출총이익률 하락 원인 ④ 7.22 임시주총 정관 변경의 구체 내용(결과 공시에는 안건명만 나옴) ⑤ 남은 스톡옵션 수량.</li>
+    <li><b>리뷰어에 대하여:</b> 레드·블루·실버·골드는 사용자가 지정한 관점을 AI가 가상으로 연기한 리뷰어입니다. 평점은 각 관점에서 보고서의 완성도를 판단한 값이고, 객관적 품질 지표가 아닙니다.</li>
+    <li><b>투자 유의:</b> 이 자료는 공시 데이터 분석이며 투자 권유가 아닙니다. 투자 판단과 그 결과는 투자자 본인에게 있습니다.</li>
+  </ul>
+</div>
+
+<footer>OpenDART 데이터 기준 · 작성일 2026-10-31 · 차트 위에 마우스를 올리면 값이 표시됩니다.</footer>
+</div>
+</div>
+
+<script>
+(function(){
+  // ---------- data ----------
+  const annual=[{l:'2023',v:28.8,m:'4.1%'},{l:'2024',v:236.4,m:'21.8%'},{l:'2025',v:517.8,m:'32.3%'},{l:'2026 상반기',v:290.8,m:'31.6%'}];
+  const Q=[
+    {q:"25.1Q",rev:369.5,gpm:41.9,sga:28.4,op:126.2,opm:34.2,yoy:null},
+    {q:"25.2Q",rev:404.0,gpm:40.7,sga:27.7,op:136.9,opm:33.9,yoy:null},
+    {q:"25.3Q",rev:410.3,gpm:46.2,sga:35.0,op:154.6,opm:37.7,yoy:null},
+    {q:"25.4Q",rev:421.8,gpm:33.0,sga:39.2,op:100.0,opm:23.7,yoy:null},
+    {q:"26.1Q",rev:441.2,gpm:41.0,sga:45.7,op:135.1,opm:30.6,yoy:7.0},
+    {q:"26.2Q",rev:479.0,gpm:42.7,sga:48.6,op:155.8,opm:32.5,yoy:13.8}];
+  const own=[{n:'소부장 PEF',a:14.15,b:14.15},{n:'산업은행',a:13.09,b:6.63},{n:'케이투인베스트',a:10.56,b:1.35},{n:'기술보증기금',a:5.6,b:0.6}];
+  const scores=[
+    {n:'레드',c:'b-red',s:[5.5,7.8,9.0,9.5]},
+    {n:'블루',c:'b-blue',s:[6.5,8.3,9.5,9.6]},
+    {n:'실버',c:'b-silver',s:[6.0,8.0,9.3,9.6]},
+    {n:'골드',c:'b-gold',s:[7.0,8.5,9.6,9.7]}];
+  const fmt=(v,d=1)=>v.toLocaleString('ko-KR',{minimumFractionDigits:d,maximumFractionDigits:d});
+  const NS='http://www.w3.org/2000/svg';
+  const el=(t,a={},p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;};
+
+  // ---------- tables ----------
+  const qt=document.getElementById('qtable');
+  Q.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${r.q}</td><td>${fmt(r.rev)}</td><td>${fmt(r.gpm)}%</td><td>${fmt(r.sga)}</td><td><b>${fmt(r.op)}</b></td><td>${fmt(r.opm)}%</td><td>${r.yoy==null?'–':'+'+fmt(r.yoy)+'%'}</td>`;qt.appendChild(tr);});
+  const sens=document.getElementById('sens');const sh=9654438;
+  [40000,60500,80000,100000,120000].forEach(p=>{const mc=p*sh/1e8;const ev=mc-483+386+68;const tr=document.createElement('tr');if(p===60500)tr.className='em';
+    tr.innerHTML=`<td>${p.toLocaleString()}${p===60500?' (공모가)':''}</td><td>${fmt(mc,0)}억</td><td>${fmt(p/4405)}배</td><td>${fmt(p/5390)}배</td><td>${fmt(ev/545.5)}배</td>`;sens.appendChild(tr);});
+  const st=document.getElementById('scoreTable');
+  scores.forEach(r=>{const tr=document.createElement('tr');let h=`<td><span class="persona" style="margin:0"><span class="badge ${r.c}" style="width:22px;height:22px;font-size:10px">${r.n[0]}</span>${r.n}</span></td>`;
+    r.s.forEach(v=>{h+=`<td><div class="bar-cell"><span class="mini" style="width:${v*7}px"></span><span class="${v>=9.5?'score-pass':''}">${fmt(v)}${v>=9.5?' ✓':''}</span></div></td>`;});tr.innerHTML=h;st.appendChild(tr);});
+  const avg=document.createElement('tr');avg.className='em';avg.innerHTML='<td>평균</td>'+[0,1,2,3].map(i=>`<td>${fmt(scores.reduce((a,r)=>a+r.s[i],0)/4,2)}</td>`).join('');st.appendChild(avg);
+  const fs=document.getElementById('finalScores');
+  [{n:'블랙',c:'b-black',t:'보고서 작성자',v:null}].concat(scores.map(r=>({n:r.n,c:r.c,t:'최종 평점',v:r.s[3]}))).forEach(r=>{
+    const d=document.createElement('div');d.className='tile';
+    d.innerHTML=`<div class="persona" style="margin:0"><span class="badge ${r.c}" style="width:28px;height:28px;font-size:12px">${r.n[0]}</span><div><div class="k">${r.n} · ${r.t}</div><div class="v" style="font-size:20px">${r.v==null?'v4 최종본':fmt(r.v)+' / 10'}</div></div></div>`;fs.appendChild(d);});
+
+  // ---------- tooltip ----------
+  function tipFor(box){let t=box.querySelector('.tip');if(!t){t=document.createElement('div');t.className='tip';box.appendChild(t);}return t;}
+  function showTip(box,html,x,y){const t=tipFor(box);t.innerHTML=html;t.style.opacity=1;const bw=box.clientWidth;let left=x+12;if(left+t.offsetWidth>bw-4)left=x-t.offsetWidth-12;t.style.left=left+'px';t.style.top=Math.max(0,y-t.offsetHeight-8)+'px';}
+  function hideTip(box){const t=box.querySelector('.tip');if(t)t.style.opacity=0;}
+  function rel(box,e){const r=box.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+  function roundTop(x,y,w,h,r){r=Math.min(r,w/2,h);return `M${x},${y+h}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h}Z`;}
+
+  // ---------- vertical bars ----------
+  function bars(id,data,valKey,labelKey,tip){
+    const box=document.getElementById(id);const W=480,H=250,m={t:22,r:10,b:30,l:40};
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',role:'img','aria-label':box.querySelector('.chart-title').textContent},box);
+    const max=Math.max(...data.map(d=>d[valKey]));const step=max>300?100:50;const top=Math.ceil(max/step)*step;
+    const y=v=>m.t+(H-m.t-m.b)*(1-v/top);
+    for(let g=0;g<=top;g+=step){el('line',{x1:m.l,x2:W-m.r,y1:y(g),y2:y(g),stroke:'var(--grid)','stroke-width':1},svg);const tx=el('text',{x:m.l-6,y:y(g)+4,'text-anchor':'end','font-size':11,fill:'var(--text-muted)'},svg);tx.textContent=g;}
+    const bw=(W-m.l-m.r)/data.length;const w=Math.min(46,bw*0.55);
+    data.forEach((d,i)=>{const cx=m.l+bw*i+bw/2;const v=d[valKey];
+      const p=el('path',{d:roundTop(cx-w/2,y(v),w,y(0)-y(v),4),fill:'var(--series-1)'},svg);
+      const lab=el('text',{x:cx,y:y(v)-6,'text-anchor':'middle','font-size':11.5,'font-weight':600,fill:'var(--text-primary)'},svg);lab.textContent=fmt(v);
+      const xl=el('text',{x:cx,y:H-10,'text-anchor':'middle','font-size':11.5,fill:'var(--text-secondary)'},svg);xl.textContent=d[labelKey];
+      const hit=el('rect',{x:cx-bw/2,y:m.t,width:bw,height:H-m.t-m.b,fill:'transparent'},svg);
+      hit.addEventListener('mousemove',e=>{p.setAttribute('opacity',.8);const [x,yy]=rel(box,e);showTip(box,tip(d),x,yy);});
+      hit.addEventListener('mouseleave',()=>{p.setAttribute('opacity',1);hideTip(box);});});
+    el('line',{x1:m.l,x2:W-m.r,y1:y(0),y2:y(0),stroke:'var(--text-muted)','stroke-width':1},svg);
+  }
+  bars('c-annual',annual,'v','l',d=>`<div>${d.l}</div>영업이익 <b>${fmt(d.v)}억</b><br>영업이익률 <b>${d.m}</b>`);
+  bars('c-quarter',Q,'op','q',d=>`<div>${d.q}</div>영업이익 <b>${fmt(d.op)}억</b><br>매출 <b>${fmt(d.rev)}억</b> · 영업이익률 <b>${fmt(d.opm)}%</b>`);
+
+  // ---------- line chart (margins) ----------
+  (function(){
+    const box=document.getElementById('c-margin');
+    const lg=document.createElement('div');lg.className='legend';lg.innerHTML='<span><i style="background:var(--series-1)"></i>매출총이익률</span><span><i style="background:var(--series-2)"></i>영업이익률</span>';box.appendChild(lg);
+    const W=960,H=260,m={t:16,r:150,b:30,l:40};const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',role:'img','aria-label':'분기 마진 추이'},box);
+    const top=50,bot=20;const y=v=>m.t+(H-m.t-m.b)*(top-v)/(top-bot);const x=i=>m.l+(W-m.l-m.r)*i/(Q.length-1);
+    for(let g=bot;g<=top;g+=10){el('line',{x1:m.l,x2:W-m.r,y1:y(g),y2:y(g),stroke:'var(--grid)'},svg);const t=el('text',{x:m.l-6,y:y(g)+4,'text-anchor':'end','font-size':11,fill:'var(--text-muted)'},svg);t.textContent=g+'%';}
+    Q.forEach((d,i)=>{const t=el('text',{x:x(i),y:H-10,'text-anchor':'middle','font-size':11.5,fill:'var(--text-secondary)'},svg);t.textContent=d.q;});
+    const series=[{k:'gpm',c:'var(--series-1)',n:'매출총이익률'},{k:'opm',c:'var(--series-2)',n:'영업이익률'}];
+    series.forEach(s=>{el('path',{d:Q.map((d,i)=>(i?'L':'M')+x(i)+','+y(d[s.k])).join(''),fill:'none',stroke:s.c,'stroke-width':2,'stroke-linejoin':'round'},svg);
+      Q.forEach((d,i)=>el('circle',{cx:x(i),cy:y(d[s.k]),r:4,fill:s.c,stroke:'var(--surface-1)','stroke-width':2},svg));
+      const last=Q[Q.length-1];const t=el('text',{x:x(Q.length-1)+10,y:y(last[s.k])+4,'font-size':12,fill:'var(--text-primary)'},svg);t.textContent=`${s.n} ${fmt(last[s.k])}%`;});
+    const a=el('text',{x:x(3),y:y(Q[3].opm)+20,'text-anchor':'middle','font-size':11,fill:'var(--text-secondary)'},svg);a.textContent='4분기 원가 상승';
+    const cross=el('line',{y1:m.t,y2:H-m.b,stroke:'var(--text-muted)','stroke-dasharray':'3 3',opacity:0},svg);
+    const hit=el('rect',{x:m.l-20,y:m.t,width:W-m.l-m.r+40,height:H-m.t-m.b,fill:'transparent'},svg);
+    hit.addEventListener('mousemove',e=>{const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const sp=pt.matrixTransform(svg.getScreenCTM().inverse());
+      let i=Math.round((sp.x-m.l)/((W-m.l-m.r)/(Q.length-1)));i=Math.max(0,Math.min(Q.length-1,i));cross.setAttribute('x1',x(i));cross.setAttribute('x2',x(i));cross.setAttribute('opacity',1);
+      const [bx,by]=rel(box,e);const d=Q[i];showTip(box,`<div>${d.q}</div>매출총이익률 <b>${fmt(d.gpm)}%</b><br>영업이익률 <b>${fmt(d.opm)}%</b>`,bx,by);});
+    hit.addEventListener('mouseleave',()=>{cross.setAttribute('opacity',0);hideTip(box);});
+  })();
+
+  // ---------- grouped horizontal bars (ownership) ----------
+  (function(){
+    const box=document.getElementById('c-own');
+    const lg=document.createElement('div');lg.className='legend';lg.innerHTML='<span><i class="sq" style="background:var(--series-1)"></i>상장 직후</span><span><i class="sq" style="background:var(--series-2)"></i>최근 보고</span>';box.appendChild(lg);
+    const W=960,rowH=46,m={t:6,r:60,b:24,l:120};const H=m.t+m.b+rowH*own.length;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',role:'img','aria-label':'재무적 투자자 지분율 변화'},box);
+    const max=15;const x=v=>m.l+(W-m.l-m.r)*v/max;
+    for(let g=0;g<=15;g+=5){el('line',{x1:x(g),x2:x(g),y1:m.t,y2:H-m.b,stroke:'var(--grid)'},svg);const t=el('text',{x:x(g),y:H-6,'text-anchor':'middle','font-size':11,fill:'var(--text-muted)'},svg);t.textContent=g+'%';}
+    const bh=14;
+    own.forEach((d,i)=>{const y0=m.t+rowH*i+7;
+      const n=el('text',{x:m.l-10,y:y0+bh+5,'text-anchor':'end','font-size':12.5,fill:'var(--text-secondary)'},svg);n.textContent=d.n;
+      [['a','var(--series-1)','상장 직후'],['b','var(--series-2)','최근 보고']].forEach(([k,c,lab],j)=>{const yy=y0+j*(bh+2);const w=x(d[k])-x(0);
+        const r=el('path',{d:`M${x(0)},${yy}H${x(0)+Math.max(w-4,0)}Q${x(0)+w},${yy} ${x(0)+w},${yy+Math.min(4,bh/2)}V${yy+bh-4}Q${x(0)+w},${yy+bh} ${x(0)+Math.max(w-4,0)},${yy+bh}H${x(0)}Z`,fill:c},svg);
+        const t=el('text',{x:x(d[k])+6,y:yy+bh-3,'font-size':11.5,fill:'var(--text-primary)'},svg);t.textContent=fmt(d[k],2)+'%';});
+      const hit=el('rect',{x:0,y:m.t+rowH*i,width:W,height:rowH,fill:'transparent'},svg);
+      hit.addEventListener('mousemove',e=>{const [bx,by]=rel(box,e);showTip(box,`<div>${d.n}</div>상장 직후 <b>${fmt(d.a,2)}%</b><br>최근 보고 <b>${fmt(d.b,2)}%</b> (${d.b-d.a>=0?'+':''}${fmt(d.b-d.a,2)}%p)`,bx,by);});
+      hit.addEventListener('mouseleave',()=>hideTip(box));});
+    el('line',{x1:x(0),x2:x(0),y1:m.t,y2:H-m.b,stroke:'var(--text-muted)'},svg);
+  })();
+
+  // ---------- theme toggle ----------
+  document.getElementById('themeBtn').addEventListener('click',()=>{const r=document.documentElement;const dark=r.dataset.theme? r.dataset.theme==='dark' : matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark';});
+})();
+</script>
+</body>
+</html>
