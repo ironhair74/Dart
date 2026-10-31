@@ -455,6 +455,10 @@ def restatement(prev, raw, a):
     for k, label in (("rev", "매출"), ("op", "영업이익")):
         it = _find(prev, k)
         p0 = _amt_won(it.get("thstrm_amount")) if it else None
+        # 작년 보고서에 3개월 칸 없이 누적만 실렸으면(상장 전 첫 정기보고서 등) 분기 단독 숫자가 아니라 견줄 수 없다
+        if it and str(a.reprt) in ("11012", "11014") and it.get("thstrm_add_amount") \
+                and _amt_won(it.get("thstrm_add_amount")) == p0:
+            continue
         cur, prv = raw[k]
         if p0 is None or abs(p0 / 1e8 - prv) < 1:
             continue
