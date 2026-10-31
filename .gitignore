@@ -1,0 +1,6 @@
+# DART API key — never commit
+.env
+**/.env
+# skill output
+output/
+__pycache__/
