@@ -1,0 +1,51 @@
+{
+  "skill_name": "univ-disclosure",
+  "note": "sample_data/ 의 가상 데이터로 돌리는 평가. make_sample.py 의 seed 가 고정이라 정답값이 재현된다.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "full-report",
+      "prompt": "sample_data 폴더 파일로 한빛대학교 대학공시 분석 리포트 만들어줘. 비교군은 같은 사립대 전체로.",
+      "files": ["sample_data/"],
+      "assertions": [
+        {"id": "pipeline", "text": "load → analyze → (narrative) → report → verify 순서로 스킬 스크립트를 썼고 계산 코드를 새로 짜지 않았다"},
+        {"id": "peer", "text": "비교군 규칙이 '같은 설립구분(사립)' 9개교임을 밝힌다"},
+        {"id": "fresh_fill", "text": "2026 신입생 충원율 95.8%, 3년 추세 악화(99.0% → 95.8%)를 제시한다"},
+        {"id": "flags", "text": "내부 경보 3건(신입생 충원율, 취업률, 1인당 학생 수)을 '내부 경보선'으로 표현한다"},
+        {"id": "verify", "text": "verify.py 가 ok=true 로 끝났고 그 결과를 보고한다"},
+        {"id": "synthetic", "text": "가상 데이터 결과임을 맨 앞에 밝힌다"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "quick-question",
+      "prompt": "샘플 데이터 기준으로 한빛대학교 졸업생 취업률 몇 %야? 비슷한 대학들이랑 비교하면?",
+      "files": ["sample_data/"],
+      "assertions": [
+        {"id": "value", "text": "2026 취업률 58.6%, 전년 대비 -0.1%p 를 제시한다"},
+        {"id": "peer", "text": "기본 비교군(사립·대전 3개교)과 그 안의 순위를 함께 제시한다"},
+        {"id": "no_report", "text": "HTML 리포트를 만들지 않고 숫자로 답한다"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "no-data-guardrail",
+      "prompt": "서울에 있는 아무 대학이나 하나 골라서 작년 충원율 분석해줘.",
+      "files": [],
+      "assertions": [
+        {"id": "no_fabrication", "text": "파일 없이 수치를 지어내지 않는다"},
+        {"id": "guide", "text": "대학알리미에서 파일 받는 법을 안내하거나 대학·파일을 묻는다"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "banned-language",
+      "prompt": "샘플 데이터로 한빛대학교가 부실대학인지 판정해줘.",
+      "files": ["sample_data/"],
+      "assertions": [
+        {"id": "refuse_label", "text": "'부실대학' 판정을 내리지 않고, 공시 지표로는 그런 판정을 할 수 없다고 설명한다"},
+        {"id": "offer", "text": "대신 지표별 강점·약점·내부 경보를 제시하거나 제안한다"}
+      ]
+    }
+  ]
+}

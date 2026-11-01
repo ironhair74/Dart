@@ -1,0 +1,185 @@
+{
+  "files": [
+    {
+      "file": "교육재정_2024.xlsx",
+      "header_rows": 1,
+      "meta_columns": {
+        "school": "학교명",
+        "founding": "설립구분",
+        "region": "지역",
+        "campus": "본분교"
+      },
+      "mapped": {
+        "faculty_secure": "전임교원 확보율(재학생 기준)",
+        "stu_per_fac": "전임교원 1인당 학생 수",
+        "tuition": "1인당 연간 평균 등록금(천원)",
+        "scholarship": "1인당 장학금(천원)",
+        "edu_return": "교육비 환원율(%)"
+      },
+      "ambiguous": [],
+      "unmapped_columns": [
+        "전임교원 확보율(학생정원 기준)"
+      ],
+      "skipped_rows": 0,
+      "year_from": "filename"
+    },
+    {
+      "file": "교육재정_2025.xlsx",
+      "header_rows": 1,
+      "meta_columns": {
+        "school": "학교명",
+        "founding": "설립구분",
+        "region": "지역",
+        "campus": "본분교"
+      },
+      "mapped": {
+        "faculty_secure": "전임교원 확보율(재학생 기준)",
+        "stu_per_fac": "전임교원 1인당 학생 수",
+        "tuition": "1인당 연간 평균 등록금(천원)",
+        "scholarship": "1인당 장학금(천원)",
+        "edu_return": "교육비 환원율(%)"
+      },
+      "ambiguous": [],
+      "unmapped_columns": [
+        "전임교원 확보율(학생정원 기준)"
+      ],
+      "skipped_rows": 0,
+      "year_from": "filename"
+    },
+    {
+      "file": "교육재정_2026.xlsx",
+      "header_rows": 1,
+      "meta_columns": {
+        "school": "학교명",
+        "founding": "설립구분",
+        "region": "지역",
+        "campus": "본분교"
+      },
+      "mapped": {
+        "faculty_secure": "전임교원 확보율(재학생 기준)",
+        "stu_per_fac": "전임교원 1인당 학생 수",
+        "tuition": "1인당 연간 평균 등록금(천원)",
+        "scholarship": "1인당 장학금(천원)",
+        "edu_return": "교육비 환원율(%)"
+      },
+      "ambiguous": [],
+      "unmapped_columns": [
+        "전임교원 확보율(학생정원 기준)"
+      ],
+      "skipped_rows": 0,
+      "year_from": "filename"
+    },
+    {
+      "file": "학생지표_2024-2026.csv",
+      "header_rows": 2,
+      "meta_columns": {
+        "school_type": "학교종류",
+        "founding": "설립구분",
+        "region": "지역",
+        "school": "학교명",
+        "campus": "본분교",
+        "year": "기준년도"
+      },
+      "mapped": {
+        "fresh_fill": "신입생 충원율 > 충원율(%)",
+        "enrolled_fill": "재학생 충원율(%)",
+        "employ": "졸업생 취업률(%)",
+        "dropout": "중도탈락 학생 비율(%)",
+        "competition": "신입생 경쟁률"
+      },
+      "ambiguous": [],
+      "unmapped_columns": [],
+      "skipped_rows": 1,
+      "year_from": "column"
+    }
+  ],
+  "errors": [],
+  "rows": 360,
+  "schools": 12,
+  "years": [
+    2024,
+    2025,
+    2026
+  ],
+  "indicators": [
+    "competition",
+    "dropout",
+    "edu_return",
+    "employ",
+    "enrolled_fill",
+    "faculty_secure",
+    "fresh_fill",
+    "scholarship",
+    "stu_per_fac",
+    "tuition"
+  ],
+  "missing_values": 0,
+  "conflicting_duplicates": 5,
+  "conflicts": [
+    {
+      "year": 2024,
+      "school": "아라대학교",
+      "indicator": "competition",
+      "values": [
+        6.2,
+        3.0
+      ],
+      "files": [
+        "학생지표_2024-2026.csv",
+        "학생지표_2024-2026.csv"
+      ]
+    },
+    {
+      "year": 2024,
+      "school": "아라대학교",
+      "indicator": "dropout",
+      "values": [
+        3.4,
+        4.2
+      ],
+      "files": [
+        "학생지표_2024-2026.csv",
+        "학생지표_2024-2026.csv"
+      ]
+    },
+    {
+      "year": 2024,
+      "school": "아라대학교",
+      "indicator": "employ",
+      "values": [
+        63.3,
+        NaN
+      ],
+      "files": [
+        "학생지표_2024-2026.csv",
+        "학생지표_2024-2026.csv"
+      ]
+    },
+    {
+      "year": 2024,
+      "school": "아라대학교",
+      "indicator": "enrolled_fill",
+      "values": [
+        89.5,
+        99.0
+      ],
+      "files": [
+        "학생지표_2024-2026.csv",
+        "학생지표_2024-2026.csv"
+      ]
+    },
+    {
+      "year": 2024,
+      "school": "아라대학교",
+      "indicator": "fresh_fill",
+      "values": [
+        92.2,
+        NaN
+      ],
+      "files": [
+        "학생지표_2024-2026.csv",
+        "학생지표_2024-2026.csv"
+      ]
+    }
+  ]
+}

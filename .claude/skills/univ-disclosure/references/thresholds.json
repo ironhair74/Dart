@@ -1,0 +1,10 @@
+{
+  "_note": "내부 경보선이다. 정부 평가(대학기본역량진단·일반재정지원 등)의 공식 기준값이 아니다. 공식 기준을 쓰려면 사용자가 해당 연도 기본계획을 확인해 값을 바꾼다. 리포트에는 '내부 경보선'이라고만 적는다.",
+  "fresh_fill":     {"warn_below": 97.0},
+  "enrolled_fill":  {"warn_below": 90.0},
+  "employ":         {"warn_below": 60.0},
+  "dropout":        {"warn_above": 6.0},
+  "faculty_secure": {"warn_below": 80.0},
+  "stu_per_fac":    {"warn_above": 30.0},
+  "edu_return":     {"warn_below": 130.0}
+}

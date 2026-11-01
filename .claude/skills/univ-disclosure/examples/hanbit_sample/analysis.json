@@ -1,0 +1,473 @@
+{
+  "generated_at": "2026-11-01T13:26:28",
+  "school": "한빛대학교",
+  "founding": "사립",
+  "region": "대전",
+  "base_year": 2026,
+  "years": [
+    2024,
+    2025,
+    2026
+  ],
+  "peer_group": {
+    "rule": "같은 설립구분(사립)",
+    "schools": [
+      "가람대학교",
+      "누리대학교",
+      "다온대학교",
+      "마루대학교",
+      "새솔대학교",
+      "아라대학교",
+      "차오름대학교",
+      "푸른대학교",
+      "하늘대학교"
+    ],
+    "n": 9
+  },
+  "universe_n": 12,
+  "indicators": [
+    {
+      "id": "fresh_fill",
+      "name": "신입생 충원율(정원내)",
+      "unit": "%",
+      "direction": "up",
+      "definition": "정원내 입학자 수 ÷ 정원내 모집인원 × 100",
+      "series": [
+        {
+          "year": 2024,
+          "value": 99.0
+        },
+        {
+          "year": 2025,
+          "value": 97.4
+        },
+        {
+          "year": 2026,
+          "value": 95.8
+        }
+      ],
+      "source_column": "신입생 충원율 > 충원율(%)",
+      "source_file": "학생지표_2024-2026.csv",
+      "value": 95.8,
+      "yoy": -1.6,
+      "yoy_unit": "%p",
+      "peer": {
+        "n": 9,
+        "median": 92.5,
+        "mean": 93.96,
+        "min": 90.3,
+        "max": 100.0,
+        "gap_vs_median": 3.3,
+        "rank": 3,
+        "rank_of": 10
+      },
+      "percentile": 72.73,
+      "trend": {
+        "from_year": 2024,
+        "delta": -3.2,
+        "label": "악화"
+      }
+    },
+    {
+      "id": "enrolled_fill",
+      "name": "재학생 충원율",
+      "unit": "%",
+      "direction": "up",
+      "definition": "(정원내+정원외 재학생) ÷ (편제정원 − 학생모집정지인원) × 100",
+      "series": [
+        {
+          "year": 2024,
+          "value": 107.7
+        },
+        {
+          "year": 2025,
+          "value": 106.1
+        },
+        {
+          "year": 2026,
+          "value": 104.5
+        }
+      ],
+      "source_column": "재학생 충원율(%)",
+      "source_file": "학생지표_2024-2026.csv",
+      "value": 104.5,
+      "yoy": -1.6,
+      "yoy_unit": "%p",
+      "peer": {
+        "n": 9,
+        "median": 100.4,
+        "mean": 100.93,
+        "min": 89.1,
+        "max": 113.8,
+        "gap_vs_median": 4.1,
+        "rank": 4,
+        "rank_of": 10
+      },
+      "percentile": 54.55,
+      "trend": {
+        "from_year": 2024,
+        "delta": -3.2,
+        "label": "악화"
+      }
+    },
+    {
+      "id": "employ",
+      "name": "졸업생 취업률",
+      "unit": "%",
+      "direction": "up",
+      "definition": "취업자 ÷ (졸업자 − 진학자 − 입대자 − 취업불가능자 − 외국인유학생 − 제외인정자) × 100",
+      "series": [
+        {
+          "year": 2024,
+          "value": 59.7
+        },
+        {
+          "year": 2025,
+          "value": 58.7
+        },
+        {
+          "year": 2026,
+          "value": 58.6
+        }
+      ],
+      "source_column": "졸업생 취업률(%)",
+      "source_file": "학생지표_2024-2026.csv",
+      "value": 58.6,
+      "yoy": -0.1,
+      "yoy_unit": "%p",
+      "peer": {
+        "n": 9,
+        "median": 60.6,
+        "mean": 61.42,
+        "min": 53.7,
+        "max": 69.5,
+        "gap_vs_median": -2.0,
+        "rank": 7,
+        "rank_of": 10
+      },
+      "percentile": 36.36,
+      "trend": {
+        "from_year": 2024,
+        "delta": -1.1,
+        "label": "악화"
+      }
+    },
+    {
+      "id": "dropout",
+      "name": "중도탈락 학생 비율",
+      "unit": "%",
+      "direction": "down",
+      "definition": "중도탈락 학생 수 ÷ 재적 학생 수 × 100",
+      "series": [
+        {
+          "year": 2024,
+          "value": 4.6
+        },
+        {
+          "year": 2025,
+          "value": 5.0
+        },
+        {
+          "year": 2026,
+          "value": 5.5
+        }
+      ],
+      "source_column": "중도탈락 학생 비율(%)",
+      "source_file": "학생지표_2024-2026.csv",
+      "value": 5.5,
+      "yoy": 0.5,
+      "yoy_unit": "%p",
+      "peer": {
+        "n": 9,
+        "median": 4.4,
+        "mean": 4.99,
+        "min": 3.4,
+        "max": 8.1,
+        "gap_vs_median": 1.1,
+        "rank": 7,
+        "rank_of": 10
+      },
+      "percentile": 45.45,
+      "trend": {
+        "from_year": 2024,
+        "delta": 0.9,
+        "label": "악화"
+      }
+    },
+    {
+      "id": "faculty_secure",
+      "name": "전임교원 확보율(재학생 기준)",
+      "unit": "%",
+      "direction": "up",
+      "definition": "전임교원 수 ÷ 교원법정정원(재학생 기준) × 100",
+      "series": [
+        {
+          "year": 2024,
+          "value": 78.9
+        },
+        {
+          "year": 2025,
+          "value": 79.5
+        },
+        {
+          "year": 2026,
+          "value": 80.0
+        }
+      ],
+      "source_column": "전임교원 확보율(재학생 기준)",
+      "source_file": "교육재정_2026.xlsx",
+      "value": 80.0,
+      "yoy": 0.5,
+      "yoy_unit": "%p",
+      "peer": {
+        "n": 9,
+        "median": 81.2,
+        "mean": 82.37,
+        "min": 72.0,
+        "max": 89.2,
+        "gap_vs_median": -1.2,
+        "rank": 7,
+        "rank_of": 10
+      },
+      "percentile": 36.36,
+      "trend": {
+        "from_year": 2024,
+        "delta": 1.1,
+        "label": "개선"
+      }
+    },
+    {
+      "id": "stu_per_fac",
+      "name": "전임교원 1인당 학생 수",
+      "unit": "명",
+      "direction": "down",
+      "definition": "재학생 수 ÷ 전임교원 수",
+      "series": [
+        {
+          "year": 2024,
+          "value": 31.0
+        },
+        {
+          "year": 2025,
+          "value": 30.7
+        },
+        {
+          "year": 2026,
+          "value": 30.4
+        }
+      ],
+      "source_column": "전임교원 1인당 학생 수",
+      "source_file": "교육재정_2026.xlsx",
+      "value": 30.4,
+      "yoy": -0.3,
+      "yoy_unit": "명",
+      "peer": {
+        "n": 9,
+        "median": 28.5,
+        "mean": 26.43,
+        "min": 19.6,
+        "max": 32.3,
+        "gap_vs_median": 1.9,
+        "rank": 8,
+        "rank_of": 10
+      },
+      "percentile": 27.27,
+      "trend": {
+        "from_year": 2024,
+        "delta": -0.6,
+        "label": "개선"
+      }
+    },
+    {
+      "id": "tuition",
+      "name": "1인당 연간 평균 등록금",
+      "unit": "천원",
+      "direction": "down",
+      "definition": "연간 등록금 총액 ÷ 재학생 수 (천원)",
+      "series": [
+        {
+          "year": 2024,
+          "value": 6937.0
+        },
+        {
+          "year": 2025,
+          "value": 6997.0
+        },
+        {
+          "year": 2026,
+          "value": 7057.0
+        }
+      ],
+      "source_column": "1인당 연간 평균 등록금(천원)",
+      "source_file": "교육재정_2026.xlsx",
+      "value": 7057.0,
+      "yoy": 60.0,
+      "yoy_unit": "천원",
+      "peer": {
+        "n": 9,
+        "median": 7495.0,
+        "mean": 7529.44,
+        "min": 6590.0,
+        "max": 8179.0,
+        "gap_vs_median": -438.0,
+        "rank": 3,
+        "rank_of": 10
+      },
+      "percentile": 72.73,
+      "trend": {
+        "from_year": 2024,
+        "delta": 120.0,
+        "label": "악화"
+      }
+    },
+    {
+      "id": "scholarship",
+      "name": "1인당 장학금",
+      "unit": "천원",
+      "direction": "up",
+      "definition": "장학금 총액 ÷ 재학생 수 (천원)",
+      "series": [
+        {
+          "year": 2024,
+          "value": 4153.0
+        },
+        {
+          "year": 2025,
+          "value": 4243.0
+        },
+        {
+          "year": 2026,
+          "value": 4333.0
+        }
+      ],
+      "source_column": "1인당 장학금(천원)",
+      "source_file": "교육재정_2026.xlsx",
+      "value": 4333.0,
+      "yoy": 90.0,
+      "yoy_unit": "천원",
+      "peer": {
+        "n": 9,
+        "median": 4421.0,
+        "mean": 4233.33,
+        "min": 3455.0,
+        "max": 4910.0,
+        "gap_vs_median": -88.0,
+        "rank": 6,
+        "rank_of": 10
+      },
+      "percentile": 36.36,
+      "trend": {
+        "from_year": 2024,
+        "delta": 180.0,
+        "label": "개선"
+      }
+    },
+    {
+      "id": "edu_return",
+      "name": "교육비 환원율",
+      "unit": "%",
+      "direction": "up",
+      "definition": "총교육비 ÷ 등록금 수입 × 100",
+      "series": [
+        {
+          "year": 2024,
+          "value": 162.0
+        },
+        {
+          "year": 2025,
+          "value": 159.8
+        },
+        {
+          "year": 2026,
+          "value": 157.1
+        }
+      ],
+      "source_column": "교육비 환원율(%)",
+      "source_file": "교육재정_2026.xlsx",
+      "value": 157.1,
+      "yoy": -2.7,
+      "yoy_unit": "%p",
+      "peer": {
+        "n": 9,
+        "median": 152.9,
+        "mean": 151.29,
+        "min": 125.8,
+        "max": 174.4,
+        "gap_vs_median": 4.2,
+        "rank": 5,
+        "rank_of": 10
+      },
+      "percentile": 54.55,
+      "trend": {
+        "from_year": 2024,
+        "delta": -4.9,
+        "label": "악화"
+      }
+    },
+    {
+      "id": "competition",
+      "name": "신입생 경쟁률",
+      "unit": ":1",
+      "direction": "up",
+      "definition": "지원자 수 ÷ 모집인원",
+      "series": [
+        {
+          "year": 2024,
+          "value": 6.1
+        },
+        {
+          "year": 2025,
+          "value": 5.6
+        },
+        {
+          "year": 2026,
+          "value": 5.1
+        }
+      ],
+      "source_column": "신입생 경쟁률",
+      "source_file": "학생지표_2024-2026.csv",
+      "value": 5.1,
+      "yoy": -0.5,
+      "yoy_unit": ":1",
+      "peer": {
+        "n": 9,
+        "median": 6.2,
+        "mean": 5.6,
+        "min": 3.2,
+        "max": 8.1,
+        "gap_vs_median": -1.1,
+        "rank": 7,
+        "rank_of": 10
+      },
+      "percentile": 36.36,
+      "trend": {
+        "from_year": 2024,
+        "delta": -1.0,
+        "label": "악화"
+      }
+    }
+  ],
+  "flags": [
+    {
+      "id": "fresh_fill",
+      "text": "신입생 충원율(정원내) 95.8% < 내부 경보선 97"
+    },
+    {
+      "id": "employ",
+      "text": "졸업생 취업률 58.6% < 내부 경보선 60"
+    },
+    {
+      "id": "stu_per_fac",
+      "text": "전임교원 1인당 학생 수 30.4명 > 내부 경보선 30"
+    }
+  ],
+  "warnings": [],
+  "sources": [
+    "교육재정_2024.xlsx",
+    "교육재정_2025.xlsx",
+    "교육재정_2026.xlsx",
+    "학생지표_2024-2026.csv"
+  ],
+  "strengths": [],
+  "weaknesses": []
+}
